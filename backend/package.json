@@ -1,0 +1,14 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "A backend api for news site",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "main": "index.js",
+  "author": "pedro moreira",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
