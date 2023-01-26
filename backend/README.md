@@ -29,3 +29,10 @@
 ```bash
     curl -X GET http://localhost:3000/user/id
 ```
+
+### Atualizando informações do usuário pela rota PATCH com Curl:
+```bash
+    curl -X PATCH http://localhost:3000/user/63d206cdebfaf080848dd278 
+        -H "Content-Type: application/json" 
+        -d '{"username": "pedromoreira49"}'
+```
