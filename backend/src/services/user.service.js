@@ -1,5 +1,6 @@
 import User from "../models/User.js"
 
-const create = (body) => User.create(body)
+export const createService = (body) => User.create(body)
 
-export default {create}
+export const findAllService = () => User.find()
+
