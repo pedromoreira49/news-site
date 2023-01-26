@@ -19,3 +19,13 @@
 	    -d '{"name": user}'
         -v
 ```
+
+### Buscando todos usuários com Curl:
+```bash
+    curl -X GET http://localhost:3000/user
+```
+
+### Buscando usuário pelo ID com Curl:
+```bash
+    curl -X GET http://localhost:3000/user/id
+```
