@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import {createService, findAllService, findByIdService} from "../services/user.service.js"
+import {createService, findAllService, findByIdService, updateService} from "../services/user.service.js"
 
 export const createUser = async (req, res) => {
     const {name, username, email, password, avatar, background} = req.body
@@ -61,4 +61,44 @@ export const findById = async (req, res) => {
     }
 
     res.send(user)
+}
+
+export const updateUser = async (req, res) => {
+    const {name, username, email, password, avatar, background} = req.body
+
+    if(!name && !username && !email && !password && !avatar && !background){
+        res.status(400).send({
+            message: 'Submit at least one field for update!'
+        })
+    }
+
+    const id = req.params.id
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(400).send({
+            message: "Invalid ID."
+        })
+    }
+
+    const user = await findByIdService(id)
+
+    if(!user){
+        return res.status(400).send({
+            message: "User not found."
+        })
+    }
+
+    await updateService(
+        id,
+        name,
+        username,
+        email,
+        password,
+        avatar,
+        background
+    )
+
+    res.send({
+        message: "User successfully updated!"
+    })
 }
