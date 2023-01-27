@@ -44,21 +44,7 @@ export const findAll = async (req, res) => {
 }
 
 export const findById = async (req, res) => {
-    const id = req.params.id
-
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(400).send({
-            message: "Invalid ID"
-        })
-    }
-
-    const user = await findByIdService(id)
-
-    if(!user){
-        return res.status(400).send({
-            message: "User not found!"
-        })
-    }
+    const user = req.user
 
     res.send(user)
 }
@@ -72,21 +58,7 @@ export const updateUser = async (req, res) => {
         })
     }
 
-    const id = req.params.id
-
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(400).send({
-            message: "Invalid ID."
-        })
-    }
-
-    const user = await findByIdService(id)
-
-    if(!user){
-        return res.status(400).send({
-            message: "User not found."
-        })
-    }
+    const {id, user} = req
 
     await updateService(
         id,
