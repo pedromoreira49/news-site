@@ -36,3 +36,10 @@
         -H "Content-Type: application/json" 
         -d '{"username": "pedromoreira49"}'
 ```
+
+### Fazendo login com Curl:
+```bash
+    curl -X POST http://localhost:3000/login
+        -H "Content-Type: application/json" 
+        -d '{"email": "email@example.com", "password": "examplepassword"}'
+```
