@@ -1,7 +1,9 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import userRoute from './routes/user.route.js'
 import connect from './database/db.js'
+
+import userRoute from './routes/user.route.js'
+import loginRoute from './routes/auth.route.js'
 
 dotenv.config()
 const app = express()
@@ -11,6 +13,7 @@ connect()
 app.use(express.json())
 
 app.use('/user', userRoute)
+app.use('/login', loginRoute)
 
 app.listen(port, () => {
     console.log(`app running on port: ${port}`)
