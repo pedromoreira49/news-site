@@ -48,5 +48,13 @@
 ```bash
     curl -X POST http://localhost:3000/news 
         -H "Content-Type: application/json" 
-        -d '{"tittle": "Example Tittle", "text": "Example content", "banner": "exampleImage.jpg"}'
+        -d '{"title": "Example Tittle", "text": "Example content", "banner": "exampleImage.jpg"}'
+```
+
+### Passing user token to create news with Curl:
+```bash
+    curl -X POST http://localhost:3000/news 
+        -H "Content-Type: application/json"
+        -H "Authorization: Bearer {token}" 
+        -d '{"title": "Example Tittle", "text": "Example content", "banner": "exampleImage.jpg"}'
 ```
