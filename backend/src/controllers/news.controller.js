@@ -3,19 +3,19 @@ import { createService, findAllService } from '../services/news.service.js'
 
 export const create = async (req, res) => {
     try{
-        const { tittle, text, banner } = req.body
+        const { title, text, banner } = req.body
 
-        if(!tittle || !text || !banner){
+        if(!title || !text || !banner){
             return res.status(400).send({
                 message: "Submit all fields for create News!"
             })
         }
 
         await createService({
-            tittle,
+            title,
             text,
             banner,
-            user: {_id: "63d5962003021a1b3b17292a"}
+            user: req.userId
         })
 
         res.status(201).send({
