@@ -1,10 +1,10 @@
-### Fazendo requisição com Curl:
+### Making a request with Curl:
 
 ```bash
     curl -X POST http://localhost:3000/{endpoint}(ex: user)
 ```
 
-### Enviando dados em formato json com Curl:
+### Sending data in json format with Curl:
 
 ```bash
     curl -X POST http://localhost:3000/user 
@@ -12,7 +12,7 @@
 	    -d '{"name": user}'
 ```
 
-### Verificando status code nas respostas das requisições:
+### Checking status code in requests responses:
 ```bash
     curl -X POST http://localhost:3000/user 
 	    -H "Content-Type: application/json" 
@@ -20,26 +20,33 @@
         -v
 ```
 
-### Buscando todos usuários com Curl:
+### Searching all users with Curl:
 ```bash
     curl -X GET http://localhost:3000/user
 ```
 
-### Buscando usuário pelo ID com Curl:
+### Searching user by ID with Curl:
 ```bash
     curl -X GET http://localhost:3000/user/id
 ```
 
-### Atualizando informações do usuário pela rota PATCH com Curl:
+### Updating user information via PATCH route with Curl:
 ```bash
     curl -X PATCH http://localhost:3000/user/63d206cdebfaf080848dd278 
         -H "Content-Type: application/json" 
         -d '{"username": "pedromoreira49"}'
 ```
 
-### Fazendo login com Curl:
+### Logging in with Curl:
 ```bash
     curl -X POST http://localhost:3000/login
         -H "Content-Type: application/json" 
         -d '{"email": "email@example.com", "password": "examplepassword"}'
+```
+
+### Creating a news with Curl:
+```bash
+    curl -X POST http://localhost:3000/news 
+        -H "Content-Type: application/json" 
+        -d '{"tittle": "Example Tittle", "text": "Example content", "banner": "exampleImage.jpg"}'
 ```
