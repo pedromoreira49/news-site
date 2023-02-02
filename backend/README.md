@@ -75,3 +75,10 @@
 ```bash
     curl -X GET http://localhost:3000/news/search?title={post title}
 ```
+
+### Searching news by User(Author) with Curl:
+```bash
+    curl -X GET http://localhost:3000/news/byUser
+        -H "Content-Type: application/json"
+        -H "Authorization: Bearer {token}"
+```
