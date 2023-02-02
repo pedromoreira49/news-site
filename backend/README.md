@@ -90,3 +90,10 @@
         -H "Authorization: Bearer {token}"
         -d '{"title": "Example Tittle", "text": "Example content", "banner": "exampleImage.jpg"}'
 ```
+
+### Delete news via DELETE route with Curl:
+```bash
+    curl -X PATCH http://localhost:3000/news/:id
+        -H "Content-Type: application/json" 
+        -H "Authorization: Bearer {token}"
+```
