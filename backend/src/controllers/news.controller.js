@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { createService, findAllService, countNews, topNewsService, findByIdService, findByTitleService, byUserService } from '../services/news.service.js'
+import { createService, findAllService, countNews, topNewsService, findByIdService, findByTitleService, byUserService, updateService } from '../services/news.service.js'
 
 export const create = async (req, res) => {
     try{
@@ -200,6 +200,39 @@ export const byUser = async (req, res) => {
                 username: item.user.username,
                 avatar: item.user.avatar
             }))
+        })
+
+    }catch(err){
+        res.status(500).send({
+            message: err.message
+        })
+    }
+}
+
+export const update = async (req, res) => {
+    try{
+        const { title, text, banner } = req.body
+
+        const { id } = req.params
+
+        if(!title && !text && !banner){
+            return res.status(400).send({
+                message: "Submit at least one field to update the post!"
+            })
+        }
+
+        const news = await findByIdService(id)
+
+        if(news.user.id != req.userId){
+            return res.status(400).send({
+                message: "You didn't update this post!"
+            })
+        }
+
+        await updateService(id, title, text, banner)
+
+        return res.send({
+            message: "Post successfully updated!"
         })
 
     }catch(err){
