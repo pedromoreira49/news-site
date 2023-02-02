@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { createService, findAllService, countNews, topNewsService, findByIdService, findByTitleService } from '../services/news.service.js'
+import { createService, findAllService, countNews, topNewsService, findByIdService, findByTitleService, byUserService } from '../services/news.service.js'
 
 export const create = async (req, res) => {
     try{
@@ -156,6 +156,39 @@ export const searchByTitle = async (req, res) => {
         }
 
         return res.send({
+            results: news.map((item) => ({
+                id: item._id,
+                title: item.title,
+                text: item.text,
+                banner: item.banner,
+                likes: item.likes,
+                comments: item.comments,
+                name: item.user.name,
+                username: item.user.username,
+                avatar: item.user.avatar
+            }))
+        })
+
+    }catch(err){
+        res.status(500).send({
+            message: err.message
+        })
+    }
+}
+
+export const byUser = async (req, res) => {
+    try{
+        const id = req.userId
+
+        const news = await byUserService(id)
+
+        if(news.length === 0){
+            return res.status(404).send({
+                message: "There are no registered news"
+            })
+        }
+
+        res.send({
             results: news.map((item) => ({
                 id: item._id,
                 title: item.title,
