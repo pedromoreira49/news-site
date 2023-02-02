@@ -67,6 +67,8 @@
 ### Searching news by ID with Curl:
 ```bash
     curl -X GET http://localhost:3000/news/:id
+        -H "Content-Type: application/json"
+        -H "Authorization: Bearer {token}"
 ```
 
 ### Searching news by Title with Curl:
