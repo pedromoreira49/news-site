@@ -58,3 +58,8 @@
         -H "Authorization: Bearer {token}" 
         -d '{"title": "Example Tittle", "text": "Example content", "banner": "exampleImage.jpg"}'
 ```
+
+### Searching top news with Curl:
+```bash
+    curl -X GET http://localhost:3000/news/top
+```
