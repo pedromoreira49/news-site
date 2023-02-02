@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { createService, findAllService, countNews, topNewsService, findByIdService, findByTitleService, byUserService, updateService } from '../services/news.service.js'
+import { createService, findAllService, countNews, topNewsService, findByIdService, findByTitleService, byUserService, updateService, deleteService } from '../services/news.service.js'
 
 export const create = async (req, res) => {
     try{
@@ -233,6 +233,31 @@ export const update = async (req, res) => {
 
         return res.send({
             message: "Post successfully updated!"
+        })
+
+    }catch(err){
+        res.status(500).send({
+            message: err.message
+        })
+    }
+}
+
+export const deleteNews = async (req, res) => {
+    try{
+        const { id } = req.params
+
+        const news = await findByIdService(id)
+
+        if(news.user.id != req.userId){
+            return res.status(400).send({
+                message: "You didn't delete this post!"
+            })
+        }
+
+        await deleteService(id)
+
+        return res.send({
+            message: "News deleted successfully!"
         })
 
     }catch(err){
