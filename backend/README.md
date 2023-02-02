@@ -32,7 +32,7 @@
 
 ### Updating user information via PATCH route with Curl:
 ```bash
-    curl -X PATCH http://localhost:3000/user/63d206cdebfaf080848dd278 
+    curl -X PATCH http://localhost:3000/user/:id
         -H "Content-Type: application/json" 
         -d '{"username": "pedromoreira49"}'
 ```
@@ -81,4 +81,12 @@
     curl -X GET http://localhost:3000/news/byUser
         -H "Content-Type: application/json"
         -H "Authorization: Bearer {token}"
+```
+
+### Updating news information via PATCH route with Curl:
+```bash
+    curl -X PATCH http://localhost:3000/news/:id
+        -H "Content-Type: application/json" 
+        -H "Authorization: Bearer {token}"
+        -d '{"title": "Example Tittle", "text": "Example content", "banner": "exampleImage.jpg"}'
 ```
