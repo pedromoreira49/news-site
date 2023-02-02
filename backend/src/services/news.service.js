@@ -19,3 +19,5 @@ export const findByTitleService = (title) => News.find({
 }).sort({ _id: -1 }).populate("user")
 
 export const byUserService = (id) => News.find({user: id}).sort({ _id: -1 }).populate("user")
+
+export const updateService = (id, title, text, banner) => News.findOneAndUpdate({ _id: id}, {title, text, banner}, {rawResult: true})
