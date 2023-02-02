@@ -68,3 +68,8 @@
 ```bash
     curl -X GET http://localhost:3000/news/:id
 ```
+
+### Searching news by Title with Curl:
+```bash
+    curl -X GET http://localhost:3000/news/search?title={post title}
+```
