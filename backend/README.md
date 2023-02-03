@@ -97,3 +97,9 @@
         -H "Content-Type: application/json" 
         -H "Authorization: Bearer {token}"
 ```
+
+### Add/Remove Likes in news via PATCH route with Curl:
+```bash
+    curl -X PATCH http://localhost:3000/news/like/:id 
+        -H "Authorization: Bearer {token}"
+```
