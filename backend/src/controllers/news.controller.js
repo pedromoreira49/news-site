@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
-import { createService, findAllService, countNews, topNewsService, findByIdService, findByTitleService, byUserService, updateService, deleteService, likeNewsService, deleteLikeNewsService } from '../services/news.service.js'
+import { stringify } from 'uuid'
+import { createService, findAllService, countNews, topNewsService, findByIdService, findByTitleService, byUserService, updateService, deleteService, likeNewsService, deleteLikeNewsService, addCommentService, removeCommentService } from '../services/news.service.js'
 
 export const create = async (req, res) => {
     try{
@@ -283,6 +284,57 @@ export const likeNews = async (req, res) => {
 
         res.send({
             message: "Like done successfully!"
+        })
+
+    }catch(err){
+        res.status(500).send({
+            message: err.message
+        })
+    }
+}
+
+export const addComment = async (req, res) => {
+    try{
+        const { id } = req.params
+        const userId = req.userId
+        const {comment} = req.body
+
+        if(!comment){
+            return res.status(400).send({
+                message: "Write a message to comment!"
+            })
+        }
+
+        await addCommentService(id, comment, userId)
+
+        res.send({
+            message: "Comment successfully completed!"
+        })
+
+    }catch(err){
+        res.status(500).send({
+            message: err.message
+        })
+    }
+}
+
+export const removeComment = async (req, res) => {
+    try{
+        const { idNews, idComment } = req.params
+        const userId = req.userId
+
+        const commentDeleted = await removeCommentService(idNews, idComment, userId)
+
+        const commentFinder = commentDeleted.comments.find((comment) => comment.idComment === idComment)
+
+        if(JSON.stringify(commentFinder.userId) !== JSON.stringify(userId)){
+            return res.status(400).send({
+                message: "You can't remove this comment!"
+            })
+        }
+        
+        res.send({
+            message: "Comment successfully removed!"
         })
 
     }catch(err){
