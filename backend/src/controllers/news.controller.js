@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { createService, findAllService, countNews, topNewsService, findByIdService, findByTitleService, byUserService, updateService, deleteService } from '../services/news.service.js'
+import { createService, findAllService, countNews, topNewsService, findByIdService, findByTitleService, byUserService, updateService, deleteService, likeNewsService, deleteLikeNewsService } from '../services/news.service.js'
 
 export const create = async (req, res) => {
     try{
@@ -258,6 +258,31 @@ export const deleteNews = async (req, res) => {
 
         return res.send({
             message: "News deleted successfully!"
+        })
+
+    }catch(err){
+        res.status(500).send({
+            message: err.message
+        })
+    }
+}
+
+export const likeNews = async (req, res) => {
+    try{
+        const {id} = req.params
+        const userId = req.userId
+
+        const newsLiked = await likeNewsService(id, userId)
+
+        if(!newsLiked){
+            await deleteLikeNewsService(id, userId)
+            return res.status(200).send({
+                message: "Like successfully removed!"
+            })
+        }
+
+        res.send({
+            message: "Like done successfully!"
         })
 
     }catch(err){
