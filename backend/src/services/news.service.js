@@ -1,4 +1,5 @@
 import News from '../models/News.js'
+import { v4 as uuid } from 'uuid'
 
 export const createService = (body) => News.create(body)
 
@@ -33,3 +34,18 @@ export const deleteLikeNewsService = (idNews, userId) => News.findOneAndUpdate(
     {_id: idNews},
     {$pull: {likes: {userId}} //$pull (remove like of user in the post)
 })
+
+export const addCommentService = (idNews, comment, userId) => {
+
+    const idComment = uuid()
+
+    return News.findOneAndUpdate(
+        {_id: idNews},
+        {$push: {comments: {idComment, userId, comment, created: new Date()}}}
+    )
+}
+
+export const removeCommentService = (idNews, idComment, userId) => News.findOneAndUpdate(
+    {_id: idNews}, 
+    {$pull: {comments: {idComment, userId}}}
+)
