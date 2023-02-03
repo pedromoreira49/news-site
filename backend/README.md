@@ -103,3 +103,17 @@
     curl -X PATCH http://localhost:3000/news/like/:id 
         -H "Authorization: Bearer {token}"
 ```
+
+### Add comments in news via PATCH route with Curl:
+```bash
+    curl -X PATCH http://localhost:3000/news/comment/:id 
+        -H "Content-Type: application/json"
+        -H "Authorization: Bearer {token}"
+        -d '{"comment": "teste"}'
+```
+
+### Remove comments in news via PATCH route with Curl:
+```bash
+    curl -X PATCH http://localhost:3000/news/comment/:idNews/:idComment 
+        -H "Authorization: Bearer {token}"
+```
